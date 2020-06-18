@@ -88,7 +88,7 @@ public class SessionCacheConfigUpdateTest extends FATServletClient {
         String hazelcastConfigFile = "hazelcast-localhost-only.xml";
         String osName = System.getProperty("os.name").toLowerCase();
 
-        if (FATSuite.isMulticastDisabled() || osName.contains("mac os") || osName.contains("macos")) {
+        if (FATSuite.isMulticastDisabled() || osName.contains("mac os") || osName.contains("macos") || osName.contains("z/os")) {
             Log.info(SessionCacheConfigUpdateTest.class, "setUp", "Disabling multicast in Hazelcast config.");
             hazelcastConfigFile = "hazelcast-localhost-only-multicastDisabled.xml";
         }
