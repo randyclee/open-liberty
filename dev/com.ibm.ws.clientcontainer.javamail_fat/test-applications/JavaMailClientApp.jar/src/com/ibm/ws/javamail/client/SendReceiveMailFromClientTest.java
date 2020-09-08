@@ -43,7 +43,7 @@ public class SendReceiveMailFromClientTest {
      * Send and receive email using passed mail session. Will generate a unique subject line and then
      * check for that subject when receiving email. Prints out success messages to log on send and receive.
      * The log can be scanned later to verify that the test passsed.
-     * 
+     *
      * @param mailSessionToUse
      * @throws IOException
      */
@@ -54,7 +54,7 @@ public class SendReceiveMailFromClientTest {
                     ". TestName: " + testName);
         logSession(mailSessionToUse, out);
         try {
-            // As part of the test, all sessions will be configured with the below 
+            // As part of the test, all sessions will be configured with the below
             // address for the 'from' and checked when retrieving email.
             String fromUser = "fat@testserver.com";
 
@@ -75,12 +75,16 @@ public class SendReceiveMailFromClientTest {
             } else {
                 t.connect();
             }
+            
+            //Add the current thread before sending email
+            Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
+            
             t.sendMessage(msg, new Address[] { address });
 
             //print message that FAT controller will check for as part of condition that a test passed
             out.println(testName + ": Test Application client called Transport.sendMessage()");
 
-            //retrieve the message just sent.			
+            //retrieve the message just sent.
             Store store = mailSessionToUse.getStore();
             if (mailSessionToUse.getProperty("my.bypass.user") != null &&
                 mailSessionToUse.getProperty("my.bypass.password") != null) {
